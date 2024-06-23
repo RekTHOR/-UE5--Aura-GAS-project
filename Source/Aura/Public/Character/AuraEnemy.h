@@ -19,8 +19,4 @@ public:
 	AAuraEnemy();
 	virtual void HighlightActor() override;
 	virtual void UnHightlightActor() override;
-	virtual void Tick(float DeltaTime) override;
-
-private:
-	bool bHightlighted = false;
 };

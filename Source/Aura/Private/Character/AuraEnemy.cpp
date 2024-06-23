@@ -5,25 +5,19 @@
 
 AAuraEnemy::AAuraEnemy()
 {
-	PrimaryActorTick.bCanEverTick = true;
+	GetMesh()->SetCollisionResponseToChannel(ECC_Visibility, ECR_Block);
+	GetMesh()->SetCustomDepthStencilValue(250);
+	Weapon->SetCustomDepthStencilValue(250);
 }
 
 void AAuraEnemy::HighlightActor()
 {
-	bHightlighted = true;
+	GetMesh()->SetRenderCustomDepth(true);
+	Weapon->SetRenderCustomDepth(true);
 }
 
 void AAuraEnemy::UnHightlightActor()
 {
-	bHightlighted = false;
-}
-
-void AAuraEnemy::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-	if (bHightlighted)
-	{
-		DrawDebugSphere(GetWorld(), GetActorLocation(), 50.f, 12, FColor::Red);
-	}
+	GetMesh()->SetRenderCustomDepth(false);
+	Weapon->SetRenderCustomDepth(false);
 }
