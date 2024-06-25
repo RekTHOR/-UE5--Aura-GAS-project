@@ -8,7 +8,7 @@
 #include "AuraEnemy.generated.h"
 
 /**
- * 
+ *
  */
 UCLASS()
 class AURA_API AAuraEnemy : public AAuraCharacterBase, public IEnemyInterface
@@ -17,6 +17,11 @@ class AURA_API AAuraEnemy : public AAuraCharacterBase, public IEnemyInterface
 
 public:
 	AAuraEnemy();
+
+	// Enemy Interface //
 	virtual void HighlightActor() override;
 	virtual void UnHightlightActor() override;
+
+protected:
+	virtual void BeginPlay() override;
 };
