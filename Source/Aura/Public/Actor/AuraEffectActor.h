@@ -6,6 +6,13 @@
 #include "GameFramework/Actor.h"
 #include "AuraEffectActor.generated.h"
 
+UENUM(BlueprintType)
+enum class PotionType : uint8
+{
+	HealthPotion = 0 UMETA(DisplayName = "HealtPotion"),
+	ManaPotion = 1 UMETA(DisplayName = "ManaPotion")
+};
+
 class USphereComponent;
 
 UCLASS()
@@ -31,4 +38,7 @@ private:
 
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UStaticMeshComponent> Mesh;
+
+	UPROPERTY(EditAnywhere)
+	PotionType potionType;
 };
