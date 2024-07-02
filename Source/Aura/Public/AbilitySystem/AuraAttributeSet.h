@@ -13,11 +13,6 @@
  	GAMEPLAYATTRIBUTE_VALUE_SETTER(PropertyName) \
  	GAMEPLAYATTRIBUTE_VALUE_INITTER(PropertyName)
 
-#define ADD_ATTRIBUTE(Name, Category) \
-	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_##Name, Category = Category) \
-    AttributeData.AddUnique(Name); \
-    ATTRIBUTE_ACCESSORS(UAuraAttributeSet, Name)
-
 USTRUCT()
 struct FEffectProperties
 {
@@ -62,6 +57,7 @@ class AURA_API UAuraAttributeSet : public UAttributeSet
 
 public:
 	UAuraAttributeSet();
+
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 	virtual void PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) override;
