@@ -24,7 +24,7 @@ public:
 
 	// Enemy Interface //
 	virtual void HighlightActor() override;
-	virtual void UnHightlightActor() override;
+	virtual void UnHighlightActor() override;
 
 	/* Combat Interface */
 	virtual int32 GetPlayerLevel() override;

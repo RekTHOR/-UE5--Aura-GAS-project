@@ -3,7 +3,6 @@
 #include "UI/WidgetController/AuraAttributeMenuWC.h"
 #include "AbilitySystem/AuraAttributeSet.h"
 #include "AbilitySystem/Data/AttributeInfo.h"
-#include "AuraGameplayTags.h"
 
 void UAuraAttributeMenuWC::BroadCastInitialValues()
 {

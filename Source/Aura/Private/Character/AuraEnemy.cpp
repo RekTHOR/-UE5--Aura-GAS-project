@@ -33,7 +33,7 @@ void AAuraEnemy::BeginPlay()
 	GetCharacterMovement()->MaxWalkSpeed = BaseWalkSpeed;
 
 	InitAbilityActorInfo();
-	UAuraAbilitySystemLibrary::GiveStartupAbilites(this, AbilitySystemComponent);
+	UAuraAbilitySystemLibrary::GiveStartupAbilities(this, AbilitySystemComponent);
 
 	if (UAuraUserWidget* AuraUserWidget = Cast<UAuraUserWidget>(HealthBar->GetUserWidgetObject()))
 	{
@@ -86,7 +86,7 @@ void AAuraEnemy::HighlightActor()
 	Weapon->SetRenderCustomDepth(true);
 }
 
-void AAuraEnemy::UnHightlightActor()
+void AAuraEnemy::UnHighlightActor()
 {
 	GetMesh()->SetRenderCustomDepth(false);
 	Weapon->SetRenderCustomDepth(false);
