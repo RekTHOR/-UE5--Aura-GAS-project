@@ -52,10 +52,12 @@ public:
 	FGameplayTag Damage_Arcane;
 	FGameplayTag Damage_Physical;
 
+	FGameplayTag Abilities_Attack;
+
 	FGameplayTag Effects_HitReact;
 
 	TMap<FGameplayTag, FGameplayTag> DamageTypesToResistances;
-	
+
 protected:
 
 private:
