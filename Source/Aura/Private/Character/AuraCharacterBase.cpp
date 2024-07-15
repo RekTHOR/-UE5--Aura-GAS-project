@@ -47,6 +47,16 @@ void AAuraCharacterBase::Die()
 	MultiCastHandleDeath();
 }
 
+bool AAuraCharacterBase::isDead_Implementation() const
+{
+	return bDead;
+}
+
+AActor* AAuraCharacterBase::GetAvatar_Implementation()
+{
+	return this;
+}
+
 void AAuraCharacterBase::MultiCastHandleDeath_Implementation()
 {
 	Weapon->SetSimulatePhysics(true);
@@ -61,6 +71,8 @@ void AAuraCharacterBase::MultiCastHandleDeath_Implementation()
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
 	Dissolve();
+	
+	bDead = true;
 }
 
 void AAuraCharacterBase::BeginPlay()
@@ -78,7 +90,8 @@ void AAuraCharacterBase::ApplyEffectToSelf(TSubclassOf<UGameplayEffect> Gameplay
 	check(GameplayEffectClass);
 	FGameplayEffectContextHandle ContextHandle = GetAbilitySystemComponent()->MakeEffectContext();
 	ContextHandle.AddSourceObject(this);
-	const FGameplayEffectSpecHandle SpecHandle = GetAbilitySystemComponent()->MakeOutgoingSpec(GameplayEffectClass, Level, ContextHandle);
+	const FGameplayEffectSpecHandle SpecHandle = GetAbilitySystemComponent()->MakeOutgoingSpec(
+		GameplayEffectClass, Level, ContextHandle);
 	GetAbilitySystemComponent()->ApplyGameplayEffectSpecToTarget(*SpecHandle.Data.Get(), GetAbilitySystemComponent());
 }
 
@@ -101,7 +114,8 @@ void AAuraCharacterBase::Dissolve()
 {
 	if (IsValid(DissolveMaterialInstance))
 	{
-		UMaterialInstanceDynamic* DynamicMaterialInstance = UMaterialInstanceDynamic::Create(DissolveMaterialInstance, this);
+		UMaterialInstanceDynamic* DynamicMaterialInstance = UMaterialInstanceDynamic::Create(
+			DissolveMaterialInstance, this);
 		GetMesh()->SetMaterial(0, DynamicMaterialInstance);
 
 		StartDissolveTimeline(DynamicMaterialInstance);
@@ -109,7 +123,8 @@ void AAuraCharacterBase::Dissolve()
 
 	if (IsValid(WeaponDissolveMaterialInstance))
 	{
-		UMaterialInstanceDynamic* DynamicMaterialInstance = UMaterialInstanceDynamic::Create(WeaponDissolveMaterialInstance, this);
+		UMaterialInstanceDynamic* DynamicMaterialInstance = UMaterialInstanceDynamic::Create(
+			WeaponDissolveMaterialInstance, this);
 		Weapon->SetMaterial(0, DynamicMaterialInstance);
 
 		StartWeaponDissolveTimeline(DynamicMaterialInstance);
