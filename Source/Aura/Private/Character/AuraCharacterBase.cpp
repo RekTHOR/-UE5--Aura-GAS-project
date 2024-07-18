@@ -7,6 +7,7 @@
 #include "MotionWarpingComponent.h"
 #include "Aura/Aura.h"
 #include "AuraGameplayTags.h"
+#include "Kismet/GameplayStatics.h"
 
 AAuraCharacterBase::AAuraCharacterBase()
 {
@@ -94,6 +95,10 @@ FTaggedMontage AAuraCharacterBase::GetTaggedMontageByTag_Implementation(const FG
 
 void AAuraCharacterBase::MultiCastHandleDeath_Implementation()
 {
+	if (DeathSound)
+	{
+		UGameplayStatics::PlaySoundAtLocation(this, DeathSound, GetActorLocation(), GetActorRotation());
+	}
 	Weapon->SetSimulatePhysics(true);
 	Weapon->SetEnableGravity(true);
 	Weapon->SetCollisionEnabled(ECollisionEnabled::PhysicsOnly);
